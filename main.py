@@ -51,7 +51,6 @@ def report(file_path):
 
 
 def main(file_path):
-    #file_path = r"books/frankenstein.txt"
     report(file_path)
 
 if __name__ == "__main__":
