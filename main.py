@@ -1,5 +1,6 @@
 import sys
 
+
 def open_book(file_path):
     with open(file_path) as f:
         file_contents = f.read()
@@ -36,15 +37,16 @@ def sort_char_count(char_dict):
         char_list.append({"char": key, "count": char_dict[key]})
     return char_list
 
+
 def report(file_path):
     text = open_book(file_path)
     word_count = count_words(text)
     char_count = count_chars(text)
     char_count_list = sort_char_count(char_count)
-    char_count_list.sort(reverse=True,key=lambda d: d["count"])
+    char_count_list.sort(reverse=True, key=lambda d: d["count"])
     print(f"--- Begin report of {file_path} ---")
     print(f"{word_count} words found in the document")
-    print("") # one empty line
+    print("")  # one empty line
     for entry in char_count_list:
         print(f"The '{entry["char"]}' character was found {entry["count"]} times")
     print("--- End report ---")
@@ -52,6 +54,7 @@ def report(file_path):
 
 def main(file_path):
     report(file_path)
+
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
