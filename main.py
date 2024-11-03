@@ -1,3 +1,5 @@
+import sys
+
 def open_book(file_path):
     with open(file_path) as f:
         file_contents = f.read()
@@ -27,8 +29,6 @@ def count_chars(text):
             chars[char] = 1
     return chars
 
-def sort_on(dict):
-    return dict["count"]
 
 def sort_char_count(char_dict):
     char_list = []
@@ -41,7 +41,7 @@ def report(file_path):
     word_count = count_words(text)
     char_count = count_chars(text)
     char_count_list = sort_char_count(char_count)
-    char_count_list.sort(reverse=True,key=sort_on)
+    char_count_list.sort(reverse=True,key=lambda d: d["count"])
     print(f"--- Begin report of {file_path} ---")
     print(f"{word_count} words found in the document")
     print("") # one empty line
@@ -49,11 +49,14 @@ def report(file_path):
         print(f"The '{entry["char"]}' character was found {entry["count"]} times")
     print("--- End report ---")
 
-def main():
-    file_path = r"books/frankenstein.txt"
-    #read_book(file_path)
-    #print(count_words(file_path))
-    #print(count_chars(open_book(file_path)))
+
+def main(file_path):
+    #file_path = r"books/frankenstein.txt"
     report(file_path)
 
-main()
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Please provide a file path")
+        sys.exit(1)
+    file_path = sys.argv[1]
+    main(file_path)
